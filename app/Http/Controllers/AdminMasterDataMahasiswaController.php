@@ -86,7 +86,8 @@ class AdminMasterDataMahasiswaController extends Controller
     public function edit($id)
     {
         $data = [
-            'listAkun' => User::where('akses', 'mahasiswa')->pluck('name', 'id'),
+            'listAkun' =>  User::whereNotIn('id', AdminMasterDataMahasiswa::pluck('mahasiswa_id')->toArray())->pluck('name', 'id'),
+            'listProdi' => AdminMasterDataProdi::pluck('nama', 'id'),
             'bread_title1' => 'Mahasiswa',
             'bread_title2' => 'Data Mahasiswa',
             'title' => 'Form Mahasiswa',
@@ -110,7 +111,7 @@ class AdminMasterDataMahasiswaController extends Controller
             'nama' => 'required',
             'npm' => 'required|unique:admin_master_data_mahasiswas,npm,' .$id,
             'kelas' => 'required',
-            'semester' => 'required'
+            'prodi_id' => 'nullable',
         ]);
 
         $model = Model::findOrFail($id);

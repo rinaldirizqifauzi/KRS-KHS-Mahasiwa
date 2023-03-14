@@ -60,15 +60,19 @@ class AdminMasterDataKRSController extends Controller
 
         DB::beginTransaction();
 
-        $prodiId = \App\Models\AdminMasterDataProdi::get();
         $mahasiswa = \App\Models\AdminMasterDataMahasiswa::get();
         foreach ($mahasiswa as $itemMahasiswa) {
+            // dd($itemMahasiswa->prodi->childrenProdi->pluck('id'));
             // $requestData['mahasiswa_id'] = $itemMahasiswa->id;
             $requestData['mahasiswa_id'] = $itemMahasiswa->pluck('id');
             $requestData['user_id'] = auth()->user()->id;
             $requestData['tanggal_aktif'] = $request->tanggal_aktif;
-            $requestData['prodi_id'] = AdminMasterDataProdi::where('prodi_id' , 17)->pluck('id');;
-            dd($requestData);
+            $requestData['prodi_id'] = $request->prodi_id;
+
+            $cekProdi =  Model::where('prodi_id', $itemMahasiswa->id);
+            if ($cekProdi == null) {
+                AdminMasterDataKRSController::create($requestData);
+            }
         }
         DB::commit();
     }

@@ -25,7 +25,7 @@
                                         {{-- Tanggal Aktif --}}
                                         <div class="form-group">
                                             <label for="tanggal_aktif">Tanggal Aktif</label>
-                                            {!! Form::date('tanggal_aktif', null, ['class' => 'form-control']) !!}
+                                            {!! Form::date('tanggal_aktif', date('Y-m-d'), ['class' => 'form-control']) !!}
                                             <span class="text-danger">{{ $errors->first('tanggal_aktif') }}</span>
                                         </div>
                                     </div>

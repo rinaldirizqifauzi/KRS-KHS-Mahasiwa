@@ -41,7 +41,6 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($models as $item)
-                                        {{ $item }}
                                         <tr>
                                             <td>
                                                 <div class="my-auto">

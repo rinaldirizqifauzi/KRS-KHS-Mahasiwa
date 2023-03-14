@@ -45,7 +45,7 @@
                                                 </div>
                                             </td>
                                             <td>
-                                                <p class="text-xl font-weight-bold mb-0 ps-2">{{ $model->prodi->childrenProdi->first()->nama }}</p>
+                                                <p class="text-xl font-weight-bold mb-0 ps-2">{{ $model->prodi?->childrenProdi->first()->nama  ?? "Belum Ada Matakuliah"}}</p>
                                             </td>
                                         </tr>
                                     </tbody>

@@ -61,7 +61,7 @@
                                                 <span class="text-xl font-weight-bold ps-2">{{ $item->kelas }}</span>
                                             </td>
                                             <td>
-                                                <span class="text-xl font-weight-bold ps-2">{{ $item->prodi->nama }}</span>
+                                                <span class="text-xl font-weight-bold ps-2">{{ $item->prodi?->nama  ?? "Belum Ada Prodi" }}</span>
                                             </td>
                                             <td>
                                                 <center>
