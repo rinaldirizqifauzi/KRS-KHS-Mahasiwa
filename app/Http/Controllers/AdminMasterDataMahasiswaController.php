@@ -21,7 +21,7 @@ class AdminMasterDataMahasiswaController extends Controller
     public function index()
     {
         return view('admin.' . $this->viewIndex, [
-            'models' => Model::with('user')->get(),
+            'models' => Model::get(),
             'bread_title1' => 'Mahasiswa',
             'bread_title2' => 'Data Mahasiswa',
             'title' => 'Data Mahasiswa',
@@ -69,9 +69,11 @@ class AdminMasterDataMahasiswaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
+        $model = Model::findOrFail($id);
         return view('admin.' . $this->viewShow, [
+            'modelProdi' => $model->prodi->childrenProdi,
             'model' => Model::findOrFail($id),
             'bread_title1' => 'Matakuliah',
             'bread_title2' => 'Data Matakuliah',

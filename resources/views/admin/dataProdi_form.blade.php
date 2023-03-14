@@ -60,7 +60,6 @@
                                                                         </center>
                                                                         </td>
                                                                     </tr>
-                                                                @else
                                                                 @endif
                                                             @endforeach
                                                     </tbody>
@@ -72,42 +71,42 @@
                                                                     'semester' => 1
                                                                 ])
                                                             }}"
-                                                        class="btn btn-sm btn-round btn-info my-3 mx-2">Semester 1
+                                                        class="btn btn-sm btn-round btn-secondary  {{ request()->input('semester') == 1 ? 'btn-success' : '' }} my-3 mx-2">Semester 1
                                                     </a>
                                                     <a href="{{ route($routePrefix . '.create', [
                                                                     'prodi_id' => $parentProdi->id,
                                                                     'semester' => 2
                                                                 ])
                                                             }}"
-                                                        class="btn btn-sm btn-round btn-info my-3 mx-2">Semester 2
+                                                        class="btn btn-sm btn-round btn-secondary  {{ request()->input('semester') == 2 ? 'btn-success' : '' }} my-3 mx-2">Semester 2
                                                     </a>
                                                     <a href="{{ route($routePrefix . '.create', [
                                                                     'prodi_id' => $parentProdi->id,
                                                                     'semester' => 3
                                                                 ])
                                                             }}"
-                                                        class="btn btn-sm btn-round btn-info my-3 mx-2">Semester 3
+                                                        class="btn btn-sm btn-round btn-secondary  {{ request()->input('semester') == 3 ? 'btn-success' : '' }} my-3 mx-2">Semester 3
                                                     </a>
                                                     <a href="{{ route($routePrefix . '.create', [
                                                                     'prodi_id' => $parentProdi->id,
                                                                     'semester' => 4
                                                                 ])
                                                             }}"
-                                                        class="btn btn-sm btn-round btn-info my-3 mx-2">Semester 4
+                                                        class="btn btn-sm btn-round btn-secondary  {{ request()->input('semester') == 4 ? 'btn-success' : '' }} my-3 mx-2">Semester 4
                                                     </a>
                                                     <a href="{{ route($routePrefix . '.create', [
                                                                     'prodi_id' => $parentProdi->id,
                                                                     'semester' => 5
                                                                 ])
                                                             }}"
-                                                        class="btn btn-sm btn-round btn-info my-3 mx-2">Semester 5
+                                                        class="btn btn-sm btn-round btn-secondary  {{ request()->input('semester') == 5 ? 'btn-success' : '' }} my-3 mx-2">Semester 5
                                                     </a>
                                                     <a href="{{ route($routePrefix . '.create', [
                                                                     'prodi_id' => $parentProdi->id,
                                                                     'semester' => 6
                                                                 ])
                                                             }}"
-                                                        class="btn btn-sm btn-round btn-info my-3 mx-2">Semester 6
+                                                        class="btn btn-sm btn-round btn-secondary  {{ request()->input('semester') == 6 ? 'btn-success' : '' }} my-3 mx-2">Semester 6
                                                     </a>
                                                 </div>
                                             </div>
