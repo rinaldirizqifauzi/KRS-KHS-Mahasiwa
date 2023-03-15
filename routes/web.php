@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\AdminMasterDataKartuRencanaStudiController;
 use App\Http\Controllers\AdminMasterDataKRSController;
 use App\Http\Controllers\AdminMasterDataMahasiswaController;
 use App\Http\Controllers\AdminMasterDataProdiController;
@@ -10,6 +9,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BerandaAdminController;
 use App\Http\Controllers\BerandaMahasiswaController;
 use App\Http\Controllers\MahasiswaController;
+use App\Http\Controllers\MahasiswaMasterDataKRSController;
 use App\Http\Controllers\MahasiswaMasterDataMahasiswaController;
 
 /*
@@ -47,6 +47,7 @@ Route::prefix('admin')->middleware(['auth', 'auth.admin'])->name('admin')->group
 Route::prefix('mahasiswa')->middleware(['auth', 'auth.mahasiswa'])->name('mahasiswa')->group(function() {
     Route::get('beranda', [BerandaMahasiswaController::class, 'beranda'])->name('mahasiswa.beranda');
     Route::resource('data-mahasiswa', MahasiswaMasterDataMahasiswaController::class);
+    Route::resource('krs', MahasiswaMasterDataKRSController::class);
 });
 
 Route::get('logout', function () {

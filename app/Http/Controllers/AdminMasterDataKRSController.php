@@ -36,7 +36,7 @@ class AdminMasterDataKRSController extends Controller
     public function create()
     {
         return view('admin.' . $this->viewCreate, [
-            'listProdi' => AdminMasterDataProdi::where('prodi_id' , null)->pluck('nama'),
+            'listProdi' => AdminMasterDataProdi::where('prodi_id' , null)->pluck('nama','id'),
             'bread_title1' => 'Kartu Rencana Studi',
             'bread_title2' => 'Data Kartu Rencana Studi',
             'title' => 'Data Kartu Rencana Studi',
@@ -60,21 +60,20 @@ class AdminMasterDataKRSController extends Controller
 
         DB::beginTransaction();
 
-        $mahasiswa = \App\Models\AdminMasterDataMahasiswa::get();
+        $prodi = AdminMasterDataProdi::find($request->prodi_id);
+        $mahasiswa = \App\Models\AdminMasterDataMahasiswa::where('prodi_id', $prodi->id)->get();
         foreach ($mahasiswa as $itemMahasiswa) {
-            // dd($itemMahasiswa->prodi->childrenProdi->pluck('id'));
-            // $requestData['mahasiswa_id'] = $itemMahasiswa->id;
-            $requestData['mahasiswa_id'] = $itemMahasiswa->pluck('id');
+            $requestData['mahasiswa_id'] = $itemMahasiswa->mahasiswa_id;
             $requestData['user_id'] = auth()->user()->id;
             $requestData['tanggal_aktif'] = $request->tanggal_aktif;
-            $requestData['prodi_id'] = $request->prodi_id;
-
-            $cekProdi =  Model::where('prodi_id', $itemMahasiswa->id);
-            if ($cekProdi == null) {
-                AdminMasterDataKRSController::create($requestData);
+            if ($request->input('prodi_id' == $itemMahasiswa)) {
+                $requestData['prodi_id'] = $itemMahasiswa->prodi_id;
             }
+            Model::create($requestData);
         }
         DB::commit();
+        flash()->addSuccess('Data KRS Berhasil Disimpan');
+        return redirect()->route($this->routePrefix . '.index');
     }
 
     /**

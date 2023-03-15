@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('admin_master_data_detail_k_r_s', function (Blueprint $table) {
+        Schema::create('mahasiswa_master_data_k_r_s', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
         });
@@ -22,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('admin_master_data_detail_k_r_s');
+        Schema::dropIfExists('mahasiswa_master_data_k_r_s');
     }
 };

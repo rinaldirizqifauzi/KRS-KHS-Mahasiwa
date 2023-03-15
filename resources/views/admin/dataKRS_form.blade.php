@@ -32,7 +32,7 @@
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label for="prodi_id">Prodi</label>
-                                            {!! Form::select('prodi_id', $listProdi, null, ['class' => 'form-control select2', 'placeholder' => 'Pilih Prodi']) !!}
+                                            {!! Form::select('prodi_id',  $listProdi, null, ['class' => 'form-control select2', 'placeholder' => 'Pilih Prodi']) !!}
                                             <span class="text-danger">{{ $errors->first('prodi_id') }}</span>
                                         </div>
                                     </div>

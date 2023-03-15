@@ -46,7 +46,7 @@ class LoginController extends Controller
         if($user->akses == 'admin' || $user->akses == 'admin'){
             return redirect()->route('adminadmin.beranda');
         }elseif($user->akses == 'mahasiswa'){
-            return redirect()->route('adminmahasiswa.beranda');
+            return redirect()->route('mahasiswamahasiswa.beranda');
         }else{
             Auth::logout();
             flash()->addSuccess('Anda tidak memiliki hak akses');

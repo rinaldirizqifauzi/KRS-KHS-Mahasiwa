@@ -36,7 +36,7 @@ class AdminMasterDataMahasiswaController extends Controller
     {
         return view('admin.' . $this->viewCreate, [
             'listAkun' => User::whereNotIn('id', AdminMasterDataMahasiswa::pluck('mahasiswa_id')->toArray())->pluck('name', 'id'),
-            'listProdi' => AdminMasterDataProdi::pluck('nama', 'id'),
+            'listProdi' => AdminMasterDataProdi::where('prodi_id', null)->get()->pluck('nama'),
             'bread_title1' => 'Mahasiswa',
             'bread_title2' => 'Data Mahasiswa',
             'title' => 'Data Mahasiswa',

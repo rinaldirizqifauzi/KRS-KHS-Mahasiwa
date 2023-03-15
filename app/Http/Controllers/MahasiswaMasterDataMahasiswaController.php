@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\AdminMasterDataMahasiswa as Model;
+use Illuminate\Support\Facades\Auth;
 
 class MahasiswaMasterDataMahasiswaController extends Controller
 {
@@ -13,7 +14,7 @@ class MahasiswaMasterDataMahasiswaController extends Controller
     public function index()
     {
         return view('mahasiswa.' . $this->viewIndex, [
-            'models' => Model::with('mahasiswa', 'user')->where('mahasiswa_id' , auth()->user()->id)->get(),
+            'models' => Model::where('mahasiswa_id' , auth()->user()->id)->get(),
             'bread_title1' => 'Mahasiswa',
             'bread_title2' => 'Data Mahasiswa',
             'title' => 'Data Mahasiswa',
