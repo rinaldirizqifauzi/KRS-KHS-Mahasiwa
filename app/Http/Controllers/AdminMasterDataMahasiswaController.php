@@ -72,6 +72,10 @@ class AdminMasterDataMahasiswaController extends Controller
     public function show(Request $request, $id)
     {
         $model = Model::findOrFail($id);
+        if ($model->prodi_id == null) {
+            flash()->addError('Matakuliah ' . $model->nama . ' Belum Ada! ','Data Matakuliah');
+            return back();
+        }
         return view('admin.' . $this->viewShow, [
             'modelProdi' => $model->prodi->childrenProdi,
             'model' => Model::findOrFail($id),

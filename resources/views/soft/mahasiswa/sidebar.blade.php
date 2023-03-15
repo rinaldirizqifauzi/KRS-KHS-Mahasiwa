@@ -33,8 +33,8 @@
             <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Data Master</h6>
         </li>
         <li class="nav-item">
+            @if(auth()->user()->mahasiswa->first()->prodi_id != null)
             <a class="nav-link  {{ \Route::is('mahasiswakrs.*') ? 'active' : '' }}" href="{{ route('mahasiswakrs.index', ['prodi_id' =>  auth()->user()->mahasiswa->first()->prodi_id  ]) }}">
-            {{-- <a class="nav-link  {{ \Route::is('mahasiswakrs.*') ? 'active' : '' }}" href="{{ route('mahasiswakrs.index') }}"> --}}
               <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                 <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                   <title>box-3d-50</title>
@@ -53,7 +53,8 @@
               </div>
               <span class="nav-link-text ms-1">Kartu Rencana Studi</span>
             </a>
-          </li>
+            @endif
+        </li>
         <li class="nav-item mt-3">
             <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Data Mahasiswa</h6>
         </li>

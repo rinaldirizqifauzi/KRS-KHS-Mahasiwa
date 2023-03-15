@@ -64,11 +64,15 @@
                                                 <span class="text-xl font-weight-bold ps-2">{{ $item->prodi?->nama  ?? "Belum Ada Prodi" }}</span>
                                             </td>
                                             <td>
+                                                @if ($item->prodi_id != null)
                                                 <center>
                                                     <a href="{{ route($routePrefix . '.show', $item->id) }}" class="btn btn-success btn-md btn-round my-1">
                                                         Lihat Matakuliah
                                                     </a>
                                                 </center>
+                                                @else
+                                                    <center>Belum Ada Matakuliah</center>
+                                                @endif
                                             </td>
                                             <td>
                                               <center>

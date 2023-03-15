@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\AdminMasterDataKRS;
+use App\Models\AdminMasterDataMahasiswa;
 use App\Models\AdminMasterDataProdi;
 
 class MahasiswaMasterDataKRSController extends Controller
@@ -18,6 +19,12 @@ class MahasiswaMasterDataKRSController extends Controller
      */
     public function index(Request $request)
     {
+        $model = AdminMasterDataMahasiswa::get();
+        if ($model->pluck('prodi_id')) {
+            flash()->addError('KRS Belum Ada! ','Data Kartu Rencana Studi');
+            return redirect()->route('mahasiswamahasiswa.beranda');
+        }
+
         return view('mahasiswa.' . $this->viewIndex, [
             'models' => AdminMasterDataProdi::where('prodi_id', auth()->user()->mahasiswa->first()->prodi_id)->get(),
             'bread_title1' => 'Kartu Rencana Studi',
