@@ -122,12 +122,16 @@
         </div>
     </div>
   </main>
+  <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+
   <!--   Core JS Files   -->
   <script src="{{ asset('soft-ui-dashboard') }}/assets/js/core/popper.min.js"></script>
   <script src="{{ asset('soft-ui-dashboard') }}/assets/js/core/bootstrap.min.js"></script>
   <script src="{{ asset('soft-ui-dashboard') }}/assets/js/plugins/perfect-scrollbar.min.js"></script>
   <script src="{{ asset('soft-ui-dashboard') }}/assets/js/plugins/smooth-scrollbar.min.js"></script>
   <script src="{{ asset('soft-ui-dashboard') }}/assets/js/plugins/chartjs.min.js"></script>
+
+  @yield('js')
   {{-- <script>
     var win = navigator.platform.indexOf('Win') > -1;
     if (win && document.querySelector('#sidenav-scrollbar')) {

@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
@@ -12,7 +13,7 @@ use App\Http\Controllers\AdminMasterDataProdiController;
 use App\Http\Controllers\MahasiswaMasterDataKRSController;
 use App\Http\Controllers\AdminMasterDataMahasiswaController;
 use App\Http\Controllers\MahasiswaMasterDataMahasiswaController;
-
+use App\Models\MahasiswaMasterDataKRS;
 
 /*
 |--------------------------------------------------------------------------
@@ -62,3 +63,14 @@ Route::get('logout', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+Route::post('/krsmahasiswa', function(Request $request) {
+    $nama = $request->input('nama');
+
+    $krsmahasiswa = new MahasiswaMasterDataKRS();
+    $krsmahasiswa->nama = $nama;
+    $krsmahasiswa->save();
+
+    return response()->json(['message' => 'Data berhasil disimpan.']);
+  });

@@ -129,16 +129,22 @@
                                     </div>
                                 @endif
                                    <div class="row">
+                                        @if(request()->filled('prodi_id') == null)
+                                        {{-- Nama Prodi --}}
+                                        <div class="form-group">
+                                                <label for="nama">Nama Prodi</label>
+                                                {!! Form::text('nama', null , ['class' => 'form-control']) !!}
+                                                <span class="text-danger">{{ $errors->first('nama') }}</span>
+                                        </div>
+                                        @endif
                                         <div class="col-lg-4">
                                             {{-- Nama Prodi --}}
                                             <div class="form-group">
                                                 @if(request()->filled('prodi_id') != null)
                                                     <label for="nama">Nama Matakuliah</label>
-                                                @else
-                                                    <label for="nama">Nama Prodi</label>
+                                                    {!! Form::text('nama', null , ['class' => 'form-control']) !!}
+                                                    <span class="text-danger">{{ $errors->first('nama') }}</span>
                                                 @endif
-                                                {!! Form::text('nama', null , ['class' => 'form-control']) !!}
-                                                <span class="text-danger">{{ $errors->first('nama') }}</span>
                                             </div>
                                         </div>
                                         <div class="col-lg-4">
@@ -146,11 +152,9 @@
                                             <div class="form-group">
                                                 @if(request()->filled('prodi_id') != null)
                                                     <label for="sks">SKS Matakuliah</label>
-                                                @else
-                                                    <label for="nama">Nama Prodi</label>
+                                                    {!! Form::number('sks', null , ['class' => 'form-control']) !!}
+                                                    <span class="text-danger">{{ $errors->first('sks') }}</span>
                                                 @endif
-                                                {!! Form::number('sks', null , ['class' => 'form-control']) !!}
-                                                <span class="text-danger">{{ $errors->first('sks') }}</span>
                                             </div>
                                         </div>
                                         <div class="col-lg-4">
@@ -158,11 +162,9 @@
                                             <div class="form-group">
                                                 @if(request()->filled('prodi_id') != null)
                                                     <label for="bobot">Bobot Matakuliah</label>
-                                                @else
-                                                    <label for="nama">Nama Prodi</label>
+                                                    {!! Form::number('bobot', null , ['class' => 'form-control']) !!}
+                                                    <span class="text-danger">{{ $errors->first('bobot') }}</span>
                                                 @endif
-                                                {!! Form::number('bobot', null , ['class' => 'form-control']) !!}
-                                                <span class="text-danger">{{ $errors->first('bobot') }}</span>
                                             </div>
                                         </div>
                                    </div>

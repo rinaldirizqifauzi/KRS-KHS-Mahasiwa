@@ -45,4 +45,14 @@ class AdminMasterDataMahasiswa extends Model
         return $this->belongsTo(User::class);
     }
 
+    /**
+     * Get all of the krs for the AdminMasterDataMahasiswa
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function krs(): HasMany
+    {
+        return $this->hasMany(AdminMasterDataKRS::class);
+    }
+
 }

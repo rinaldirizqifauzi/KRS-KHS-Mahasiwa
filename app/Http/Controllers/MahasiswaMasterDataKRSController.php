@@ -2,14 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use Illuminate\Http\Request;
 use App\Models\AdminMasterDataKRS;
-use App\Models\AdminMasterDataMahasiswa;
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\DB;
 use App\Models\AdminMasterDataProdi;
+use App\Models\MahasiswaMasterDataKRS;
+use App\Models\AdminMasterDataMahasiswa;
+use Illuminate\Support\Facades\Validator;
 
 class MahasiswaMasterDataKRSController extends Controller
 {
+
     private $routePrefix = 'mahasiswakrs';
     private $viewIndex = 'dataKrs_index';
     private $viewCreate  = 'dataKrs_form';
@@ -19,19 +23,20 @@ class MahasiswaMasterDataKRSController extends Controller
      */
     public function index(Request $request)
     {
-        $model = AdminMasterDataMahasiswa::get();
-        if ($model->pluck('prodi_id') == null) {
+        $model = AdminMasterDataKRS::get();
+        if ($model->count() <= 0) {
             flash()->addError('KRS Belum Ada! ','Data Kartu Rencana Studi');
             return redirect()->route('mahasiswamahasiswa.beranda');
+        }else {
+            return view('mahasiswa.' . $this->viewIndex, [
+                'models' => AdminMasterDataKRS::where('prodi_id', auth()->user()->mahasiswa->first()->prodi_id)
+                                                ->paginate(10),
+                'bread_title1' => 'Kartu Rencana Studi',
+                'bread_title2' => 'Data Kartu Rencana Studi',
+                'title' => 'Data Kartu Rencana Studi',
+                'routePrefix' => $this->routePrefix
+            ]);
         }
-
-        return view('mahasiswa.' . $this->viewIndex, [
-            'models' => AdminMasterDataProdi::where('prodi_id', auth()->user()->mahasiswa->first()->prodi_id)->get(),
-            'bread_title1' => 'Kartu Rencana Studi',
-            'bread_title2' => 'Data Kartu Rencana Studi',
-            'title' => 'Data Kartu Rencana Studi',
-            'routePrefix' => $this->routePrefix
-        ]);
     }
 
     /**
@@ -47,7 +52,27 @@ class MahasiswaMasterDataKRSController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $userId = auth()->user()->id;
+        $nama = $request->input('nama');
+
+        $result = DB::table('mahasiswa_master_data_k_r_s')
+                    ->where('user_id', $userId)
+                    ->where('nama', $nama)
+                    ->exists();
+
+        if ($result == true) {
+            // jika data sudah ada di database, tampilkan pesan error
+            flash()->addError('Matakuliah sudah diambil sebelumnya!', 'Maaf ' .  auth()->user()->mahasiswa->first()->nama);
+            return redirect()->back()->withInput();
+        }
+        MahasiswaMasterDataKRS::create([
+            'user_id' => auth()->user()->id,
+            'nama' => $request->input('nama'),
+            'sks' => $request->input('sks'),
+            'semester' => $request->input('semester'),
+        ]);
+        flash()->addSuccess('Data Krs Berhasil diambil');
+        return back();
     }
 
     /**

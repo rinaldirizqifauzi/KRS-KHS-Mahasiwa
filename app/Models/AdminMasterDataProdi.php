@@ -23,8 +23,6 @@ class AdminMasterDataProdi extends Model
     {
         return $this->hasMany(AdminMasterDataProdi::class, 'prodi_id');
     }
-
-
     /**
      * Get all of the mahasiswa for the AdminMasterDataProdi
      *
@@ -32,6 +30,16 @@ class AdminMasterDataProdi extends Model
      */
     public function mahasiswa(): HasMany
     {
-        return $this->hasMany(AdminMasterDataMahasiswa::class, 'prodi_id');
+        return $this->hasMany(AdminMasterDataMahasiswa::class);
+    }
+
+    /**
+     * Get all of the krs for the AdminMasterDataProdi
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function krs(): HasMany
+    {
+        return $this->hasMany(AdminMasterDataKRS::class);
     }
 }

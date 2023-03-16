@@ -12,6 +12,7 @@ class AdminMasterDataKRS extends Model
 
     protected $guarded = [];
 
+
     /**
      * Get the mahasiswa that owns the AdminMasterDataKRS
      *
@@ -22,5 +23,13 @@ class AdminMasterDataKRS extends Model
         return $this->belongsTo(AdminMasterDataMahasiswa::class, 'mahasiswa_id');
     }
 
-
+    /**
+     * Get the prodi that owns the AdminMasterDataKRS
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function prodi(): BelongsTo
+    {
+        return $this->belongsTo(AdminMasterDataProdi::class, 'prodi_id');
+    }
 }

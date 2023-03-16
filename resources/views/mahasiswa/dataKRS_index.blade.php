@@ -15,7 +15,7 @@
     <div class="card">
         <div class="card-body p-3">
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-lg-9 col-md-7 col-sm-12">
                     <div class="d-flex flex-column h-100">
                         <h5 class="font-weight-bolder">{{ $title }}   {{ auth()->user()->mahasiswa->first()->prodi->nama }}</h5>
                         <div class="row">
@@ -28,18 +28,20 @@
                         </div>
                         <div class="container my-3">
                             <div class="table-responsive p-0">
-                                <table class="table table-sm table-bordered table-striped align-items-center justify-content-center mb-0">
+                                <table  id="tabel-prodi" class="table table-sm table-bordered table-striped align-items-center justify-content-center mb-0">
                                     <thead style="background-color: black; color: white">
                                         <tr>
                                             <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7" width="1%">No</th>
                                             <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Nama Matakuliah</th>
                                             <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Semester</th>
+                                            <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">SKS</th>
+                                            <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Bobot</th>
                                             <th class="text-uppercase text-secondary text-xs text-center font-weight-bolder opacity-7 ps-3">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php $no=1 ?>
-                                        @foreach ($models as $item)
+                                        @foreach ($models->first()->prodi->childrenProdi as $item)
                                             <tr>
                                                 <td>
                                                     <div class="my-auto">
@@ -57,10 +59,26 @@
                                                     </div>
                                                 </td>
                                                 <td>
-                                                   <center>
                                                     <div class="my-auto">
-                                                        <a href="" class="btn btn-sm btn-primary">Ambil</a>
+                                                        <h6 class="mb-0 text-xl ps-3">{{ $item->sks }}</h6>
                                                     </div>
+                                                </td>
+                                                <td>
+                                                    <div class="my-auto">
+                                                        <h6 class="mb-0 text-xl ps-3">{{ $item->bobot }}</h6>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                   <center>
+                                                    {!! Form::model($models ,['route' => 'mahasiswakrs.store', 'method' => 'POST']) !!}
+                                                        @csrf
+                                                        <input type="hidden" name="nama" value="{{ $item->nama }}">
+                                                        <input type="hidden" name="sks" value="{{ $item->semester }}">
+                                                        <input type="hidden" name="semester" value="{{ $item->sks }}">
+                                                        <div class="my-auto">
+                                                            {!! Form::submit('Ambil', ['class' => 'btn btn-sm ml-3 my-1 btn-primary btn-round float-end']) !!}
+                                                        </div>
+                                                    {!! Form::close() !!}
                                                    </center>
                                                 </td>
                                             </tr>
@@ -69,11 +87,19 @@
                                 </table>
                             </div>
                         </div>
+                        {{ $models->links() }}
                     </div>
+                </div>
+                <div class="col-lg-5 col-md-5 col-md-12">
+
                 </div>
             </div>
         </div>
     </div>
 </div>
+@endsection
+
+@section('js')
+
 @endsection
 

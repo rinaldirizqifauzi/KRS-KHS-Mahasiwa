@@ -61,8 +61,8 @@ class AdminMasterDataProdiController extends Controller
             'nama' => 'required|unique:admin_master_data_prodis',
             'prodi_id' => 'nullable|exists:admin_master_data_prodis,id',
             'semester' => 'nullable',
-            'sks' => 'required',
-            'bobot' => 'required'
+            'sks' => 'nullable',
+            'bobot' => 'nullable'
         ]);
 
 
