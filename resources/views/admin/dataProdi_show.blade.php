@@ -17,7 +17,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="d-flex flex-column h-100">
-                        <h5 class="font-weight-bolder">{{ $title }}</h5>
+                        <h5 class="font-weight-bolder">{{ $title }} {{ $model->nama }}</h5>
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="input-group">
@@ -28,7 +28,42 @@
                         </div>
                         <div class="container my-3">
                             <div class="table-responsive p-0">
-                                {{ $model->mahasiswa }}
+                                <table class="table table-sm table-bordered table-striped align-items-center justify-content-center mb-0">
+                                    <thead style="background-color: black; color: white">
+                                        <tr>
+                                            <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7" width="1%">No</th>
+                                            <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-3">Nama Mahasiswa</th>
+                                            <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-3">Npm Mahasiswa</th>
+                                            <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-3">Kelas Mahasiswa</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($model->mahasiswa as $item)
+                                        <tr>
+                                            <td>
+                                                <div class="my-auto">
+                                                    <h6 class="mb-0 text-xl ps-3">{{ $loop->iteration }}</h6>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="my-auto">
+                                                    <h6 class="mb-0 text-xl ps-3">{{ $item->nama }}</h6>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="my-auto">
+                                                    <h6 class="mb-0 text-xl ps-3">{{ $item->npm }}</h6>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="my-auto">
+                                                    <h6 class="mb-0 text-xl ps-3">{{ $item->kelas }}</h6>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>

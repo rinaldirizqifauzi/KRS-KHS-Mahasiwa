@@ -14,10 +14,10 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             // ProdiManajemenInformatikaS1Seeder::class,
-            // ProdiManajemenInformatikaS2Seeder::class,
-            // ProdiManajemenInformatikaS3Seeder::class,
-            // ProdiManajemenInformatikaS4Seeder::class,
-            // ProdiManajemenInformatikaS5Seeder::class,
+            ProdiManajemenInformatikaS2Seeder::class,
+            ProdiManajemenInformatikaS3Seeder::class,
+            ProdiManajemenInformatikaS4Seeder::class,
+            ProdiManajemenInformatikaS5Seeder::class,
             ProdiManajemenInformatikaS6Seeder::class,
         ]);
     }

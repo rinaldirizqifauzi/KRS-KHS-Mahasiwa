@@ -38,8 +38,8 @@ class AdminMasterDataKRSController extends Controller
         return view('admin.' . $this->viewCreate, [
             'listProdi' => AdminMasterDataProdi::where('prodi_id' , null)->pluck('nama','id'),
             'bread_title1' => 'Kartu Rencana Studi',
-            'bread_title2' => 'Data Kartu Rencana Studi',
-            'title' => 'Data Kartu Rencana Studi',
+            'bread_title2' => 'Form Kartu Rencana Studi',
+            'title' => 'Form Kartu Rencana Studi',
             'models' => new Model(),
             'route' => $this->routePrefix . '.store',
             'method' => 'POST',

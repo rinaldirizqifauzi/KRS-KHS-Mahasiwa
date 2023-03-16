@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('nama');
             $table->foreignId('prodi_id')->nullable();
             $table->string('semester')->nullable();
+            $table->string('sks')->nullable();
+            $table->string('bobot')->nullable();
             $table->timestamps();
         });
     }

@@ -122,11 +122,6 @@ class MahasiswaController extends Controller
     {
         $model = Model::findOrFail($id);
 
-        if ($model->id == 6) {
-            flash()->addError('Data Tidak Bisa Dihapus!');
-            return back();
-        }
-
         $model->delete();
         flash()->addSuccess('Data berhasil dihapus');
         return redirect()->route($this->routePrefix . '.index');

@@ -20,7 +20,7 @@ class MahasiswaMasterDataKRSController extends Controller
     public function index(Request $request)
     {
         $model = AdminMasterDataMahasiswa::get();
-        if ($model->pluck('prodi_id')) {
+        if ($model->pluck('prodi_id') == null) {
             flash()->addError('KRS Belum Ada! ','Data Kartu Rencana Studi');
             return redirect()->route('mahasiswamahasiswa.beranda');
         }

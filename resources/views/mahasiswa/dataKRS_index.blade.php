@@ -32,24 +32,39 @@
                                     <thead style="background-color: black; color: white">
                                         <tr>
                                             <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7" width="1%">No</th>
-                                            <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7" width="1%">Nama Matakuliah</th>
+                                            <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Nama Matakuliah</th>
+                                            <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Semester</th>
                                             <th class="text-uppercase text-secondary text-xs text-center font-weight-bolder opacity-7 ps-3">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <?php $no=1 ?>
-                                            <td>
-                                                <div class="my-auto">
-                                                    <h6 class="mb-0 text-xl ps-3">{{ $no++ }}</h6>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="my-auto">
-                                                    <h6 class="mb-0 text-xl ps-3">{{ $models->first()->nama }}</h6>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                        <?php $no=1 ?>
+                                        @foreach ($models as $item)
+                                            <tr>
+                                                <td>
+                                                    <div class="my-auto">
+                                                        <h6 class="mb-0 text-xl ps-3">{{ $no++ }}</h6>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="my-auto">
+                                                        <h6 class="mb-0 text-xl ps-3">{{ $item->nama }}</h6>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="my-auto">
+                                                        <h6 class="mb-0 text-xl ps-3">{{ $item->semester }}</h6>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                   <center>
+                                                    <div class="my-auto">
+                                                        <a href="" class="btn btn-sm btn-primary">Ambil</a>
+                                                    </div>
+                                                   </center>
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>

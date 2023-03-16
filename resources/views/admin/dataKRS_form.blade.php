@@ -39,7 +39,6 @@
                                 </div>
 
                                 {!! Form::submit($button, ['class' => 'btn btn-sm ml-3 my-1 btn-primary btn-round float-end']) !!}
-                                <a href="{{ route($routePrefix . '.index') }}" class="btn btn-sm mx-3 my-1 bg-gradient-secondary  btn-round float-end">Kembali</a>
                             {!! Form::close() !!}
                         </div>
                     </div>

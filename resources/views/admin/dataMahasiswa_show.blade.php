@@ -78,6 +78,8 @@
                                         <tr>
                                             <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7" width="1%">No</th>
                                             <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-3">Nama Matakuliah</th>
+                                            <th class="text-uppercase text-secondary text-center text-xs font-weight-bolder opacity-7 ps-3" width="6%">SKS</th>
+                                            <th class="text-uppercase text-secondary text-center text-xs font-weight-bolder opacity-7 ps-3" width="6%">Bobot</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -93,9 +95,20 @@
                                                 <td>
                                                     <p class="text-xl font-weight-bold mb-0 ps-2">{{ $item->nama }}</p>
                                                 </td>
+                                                <td>
+                                                    <p class="text-xl text-center font-weight-bold mb-0 ps-2">{{ $item->sks }}</p>
+                                                </td>
+                                                <td>
+                                                    <p class="text-xl text-center font-weight-bold mb-0 ps-2">{{ $item->bobot }}</p>
+                                                </td>
                                             </tr>
                                             @endif
                                         @endforeach
+                                        <tr>
+                                            <td colspan="2">  <p class="text-xl font-weight-bold mb-0 ps-2"><i>Total SKS & Jumlah Bobot</i></p></td>
+                                            <td><p class="text-xl text-center font-weight-bold mb-0 ps-2"><i>{{ $dataSemester->sksSemester }}</i></p></td>
+                                            <td><p class="text-xl text-center font-weight-bold mb-0 ps-2"><i>{{ $dataSemester->bobotSemester  }}</i></p></td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>

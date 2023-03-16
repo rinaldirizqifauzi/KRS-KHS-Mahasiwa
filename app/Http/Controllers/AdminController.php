@@ -124,7 +124,7 @@ class AdminController extends Controller
     {
         $model = Model::findOrFail($id);
 
-        if ($model->id == 6) {
+        if ($model->id == 1) {
             flash()->addError('Data Tidak Bisa Dihapus!');
             return back();
         }

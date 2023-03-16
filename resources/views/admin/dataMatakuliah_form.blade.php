@@ -21,9 +21,9 @@
                             <h5 class="font-weight-bolder">{{ $title }}</h5>
                         @endif
                         <div class="container my-3">
-                            {!! Form::model($models ,['route' => $route, 'method' => $method]) !!}
+                            {!! Form::model($models, ['route' => $route, 'method' => $method]) !!}
                                 @if (request()->filled('prodi_id'))
-                                    <h4>Matakuliah {{ $parentProdi->nama }} Semester {{ request()->input('semester') }}
+                                    <h4>Edit Matakuliah {{ $parentProdi->nama }} Semester {{ request()->input('semester') }}
                                     </h4>
                                     {!! Form::hidden('prodi_id', $parentProdi->id, []) !!}
                                     <div class="row">
@@ -41,8 +41,7 @@
                                                     </thead>
                                                     <tbody>
                                                         <?php $no = 1 ?>
-                                                        @foreach ($parentProdi->childrenProdi as $item)
-                                                            @if ($item->semester == request()->input('semester'))
+                                                            @if ($models->semester == request()->input('semester'))
                                                                 <tr>
                                                                     <td>
                                                                         <div class="my-auto">
@@ -51,85 +50,39 @@
                                                                     </td>
                                                                     <td>
                                                                         <div class="my-auto">
-                                                                            <h6 class="mb-0 text-xl ps-3">{{ $item->nama }}</h6>
+                                                                            <h6 class="mb-0 text-xl ps-3">{{ $models->nama }}</h6>
                                                                         </div>
                                                                     </td>
                                                                     <td>
                                                                         <div class="my-auto">
-                                                                            <h6 class="mb-0 text-center text-xl ps-3">{{ $item->sks }}</h6>
+                                                                            <h6 class="mb-0 text-center text-xl ps-3">{{ $models->sks }}</h6>
                                                                         </div>
                                                                     </td>
                                                                     <td>
                                                                         <div class="my-auto">
-                                                                            <h6 class="mb-0 text-center text-xl ps-3">{{ $item->bobot }}</h6>
+                                                                            <h6 class="mb-0 text-center text-xl ps-3">{{ $models->bobot }}</h6>
                                                                         </div>
                                                                     </td>
                                                                     <td>
                                                                     <center>
-                                                                        <a href="{{ route('adminedit.matakuliah', [$item->id,  'prodi_id' => $item->id,  'semester' => $item->semester]) }}" class="btn btn-warning btn-md btn-round my-1">
+                                                                        <a href="{{ route('adminedit.matakuliah', $models->id) }}" class="btn btn-warning btn-md btn-round my-1">
                                                                             <i class="fa-solid fa-pen-to-square fa-lg"></i>
                                                                         </a>
-                                                                        <a href="{{ route('admindelete.matakuliah', $item->id) }}" class="btn btn-danger btn-md btn-round my-1" onclick="return confirm('Anda Yakin Menghapus Matakuliah Ini?')">
+                                                                        <a href="{{ route('admindelete.matakuliah', $models->id) }}" class="btn btn-danger btn-md btn-round my-1" onclick="return confirm('Anda Yakin Menghapus Matakuliah Ini?')">
                                                                             <i class="fa-solid fa-trash-can"></i>
                                                                         </a>
                                                                     </center>
                                                                     </td>
                                                                 </tr>
                                                             @endif
-                                                        @endforeach
                                                     </tbody>
                                                 </table>
-                                                {{-- Tombol Semester --}}
-                                                <div class="d-flex">
-                                                    <a href="{{ route($routePrefix . '.create', [
-                                                                    'prodi_id' => $parentProdi->id,
-                                                                    'semester' => 1
-                                                                ])
-                                                            }}"
-                                                        class="btn btn-sm btn-round btn-secondary  {{ request()->input('semester') == 1 ? 'btn-success' : '' }} my-3 mx-2">Semester 1
-                                                    </a>
-                                                    <a href="{{ route($routePrefix . '.create', [
-                                                                    'prodi_id' => $parentProdi->id,
-                                                                    'semester' => 2
-                                                                ])
-                                                            }}"
-                                                        class="btn btn-sm btn-round btn-secondary  {{ request()->input('semester') == 2 ? 'btn-success' : '' }} my-3 mx-2">Semester 2
-                                                    </a>
-                                                    <a href="{{ route($routePrefix . '.create', [
-                                                                    'prodi_id' => $parentProdi->id,
-                                                                    'semester' => 3
-                                                                ])
-                                                            }}"
-                                                        class="btn btn-sm btn-round btn-secondary  {{ request()->input('semester') == 3 ? 'btn-success' : '' }} my-3 mx-2">Semester 3
-                                                    </a>
-                                                    <a href="{{ route($routePrefix . '.create', [
-                                                                    'prodi_id' => $parentProdi->id,
-                                                                    'semester' => 4
-                                                                ])
-                                                            }}"
-                                                        class="btn btn-sm btn-round btn-secondary  {{ request()->input('semester') == 4 ? 'btn-success' : '' }} my-3 mx-2">Semester 4
-                                                    </a>
-                                                    <a href="{{ route($routePrefix . '.create', [
-                                                                    'prodi_id' => $parentProdi->id,
-                                                                    'semester' => 5
-                                                                ])
-                                                            }}"
-                                                        class="btn btn-sm btn-round btn-secondary  {{ request()->input('semester') == 5 ? 'btn-success' : '' }} my-3 mx-2">Semester 5
-                                                    </a>
-                                                    <a href="{{ route($routePrefix . '.create', [
-                                                                    'prodi_id' => $parentProdi->id,
-                                                                    'semester' => 6
-                                                                ])
-                                                            }}"
-                                                        class="btn btn-sm btn-round btn-secondary  {{ request()->input('semester') == 6 ? 'btn-success' : '' }} my-3 mx-2">Semester 6
-                                                    </a>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 @endif
                                    <div class="row">
-                                        <div class="col-lg-4">
+                                        <div class="col-lg-3">
                                             {{-- Nama Prodi --}}
                                             <div class="form-group">
                                                 @if(request()->filled('prodi_id') != null)
@@ -141,7 +94,19 @@
                                                 <span class="text-danger">{{ $errors->first('nama') }}</span>
                                             </div>
                                         </div>
-                                        <div class="col-lg-4">
+                                        <div class="col-lg-3">
+                                            {{-- Semester --}}
+                                            <div class="form-group">
+                                                @if(request()->filled('prodi_id') != null)
+                                                    <label for="semester">Semester</label>
+                                                @else
+                                                    <label for="nama">Nama Prodi</label>
+                                                @endif
+                                                {!! Form::number('semester', null , ['class' => 'form-control']) !!}
+                                                <span class="text-danger">{{ $errors->first('semester') }}</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3">
                                             {{-- Sks Matakuliah --}}
                                             <div class="form-group">
                                                 @if(request()->filled('prodi_id') != null)
@@ -153,7 +118,7 @@
                                                 <span class="text-danger">{{ $errors->first('sks') }}</span>
                                             </div>
                                         </div>
-                                        <div class="col-lg-4">
+                                        <div class="col-lg-3">
                                             {{-- Bobot Matakuliah --}}
                                             <div class="form-group">
                                                 @if(request()->filled('prodi_id') != null)

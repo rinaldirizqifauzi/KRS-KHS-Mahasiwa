@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 class AdminMasterDataProdiController extends Controller
 {
     private $routePrefix = 'adminprodi';
+    private $routePrefixMTK = 'matakuliah';
     private $viewIndex  = 'dataProdi_index';
     private $viewCreate  = 'dataProdi_form';
     private $viewShow  = 'dataProdi_show';
@@ -59,7 +60,9 @@ class AdminMasterDataProdiController extends Controller
         $requestData = $request->validate([
             'nama' => 'required|unique:admin_master_data_prodis',
             'prodi_id' => 'nullable|exists:admin_master_data_prodis,id',
-            'semester' => 'nullable'
+            'semester' => 'nullable',
+            'sks' => 'required',
+            'bobot' => 'required'
         ]);
 
 
@@ -78,7 +81,7 @@ class AdminMasterDataProdiController extends Controller
     public function show($id)
     {
         return view('admin.' . $this->viewShow, [
-            'model' => Model::findOrFail($id),
+            'model' => Model::with('childrenProdi')->findOrFail($id),
             'bread_title1' => 'Mahasiswa',
             'bread_title2' => 'Data Mahasiswa',
             'title' => 'Data Mahasiswa',
@@ -118,6 +121,48 @@ class AdminMasterDataProdiController extends Controller
         $model->delete();
         flash()->addSuccess('Data Berhasil Dihapus!');
         return redirect()->route($this->routePrefix . '.index');
+    }
+
+    public function editMatakuliah($id)
+    {
+        $model = Model::findOrFail($id);
+        $parentProdi = new Model();
+        if (request()->filled('prodi_id')) {
+            $parentProdi = Model::with('childrenProdi')->findOrFail(request()->prodi_id);
+        }
+
+        return view('admin.dataMatakuliah_form',[
+            'semester' => Model::with('childrenProdi')->whereNotNull('semester')->pluck('semester'),
+            'parentProdi' => $parentProdi,
+            'bread_title1' => 'Prodi',
+            'bread_title2' => 'Data Prodi',
+            'title' => 'Data Prodi',
+            'models' => $model,
+            'routePrefix' => $this->routePrefix ,
+            'route' => ['adminupdate.matakuliah', $id],
+            'method' => 'PUT',
+            'button' => 'Ubah',
+
+        ]);
+        // flash()->addSuccess('Data berhasil dihapus');
+        // return redirect()->back();
+    }
+
+    public function updateMatakuliah(Request $request, $id)
+    {
+        $requestData = $request->validate([
+            'nama' => 'required|unique:admin_master_data_prodis,nama,' . $id,
+            'semester' => 'required',
+            'sks' => 'required',
+            'bobot' => 'required',
+        ]);
+
+        $model = Model::findOrFail($id);
+        $model->fill($requestData);
+        $model->save();
+
+        flash()->addSuccess('Data Berhasil Diubah');
+        return redirect()->route('adminprodi.create', ['prodi_id' => $model->prodi_id, 'semester' => $model->semester]);
     }
 
     public function deleteMatakuliah($id)

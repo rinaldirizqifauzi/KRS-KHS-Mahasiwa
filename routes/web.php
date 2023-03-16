@@ -1,16 +1,18 @@
 <?php
 
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\AdminMasterDataKRSController;
-use App\Http\Controllers\AdminMasterDataMahasiswaController;
-use App\Http\Controllers\AdminMasterDataProdiController;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\BerandaAdminController;
 use App\Http\Controllers\BerandaMahasiswaController;
-use App\Http\Controllers\MahasiswaController;
+use App\Http\Controllers\AdminMasterDataKRSController;
+use App\Http\Controllers\AdminMasterDataProdiController;
 use App\Http\Controllers\MahasiswaMasterDataKRSController;
+use App\Http\Controllers\AdminMasterDataMahasiswaController;
 use App\Http\Controllers\MahasiswaMasterDataMahasiswaController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +43,8 @@ Route::prefix('admin')->middleware(['auth', 'auth.admin'])->name('admin')->group
     Route::resource('krs', AdminMasterDataKRSController::class);
 
     // DeleteMatakuliah
+    Route::get('edit-matakuliah/{id}', [AdminMasterDataProdiController::class, 'editMatakuliah'])->name('edit.matakuliah');
+    Route::put('update-matakuliah/{id}', [AdminMasterDataProdiController::class, 'updateMatakuliah'])->name('update.matakuliah');
     Route::get('delete-matakuliah/{id}', [AdminMasterDataProdiController::class, 'deleteMatakuliah'])->name('delete.matakuliah');
 });
 
