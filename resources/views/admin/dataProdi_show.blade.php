@@ -35,6 +35,7 @@
                                             <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-3">Nama Mahasiswa</th>
                                             <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-3">Npm Mahasiswa</th>
                                             <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-3">Kelas Mahasiswa</th>
+                                            <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-3">Kelas Mahasiswa</th>
                                         </tr>
                                     </thead>
                                     <tbody>

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('admin_master_data_mahasiswas', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('mahasiswa_id')->nullable();
+            $table->unsignedBigInteger('mahasiswa_id')->nullable();
             $table->foreignId('prodi_id')->nullable();
             $table->string('nama');
             $table->string('npm');

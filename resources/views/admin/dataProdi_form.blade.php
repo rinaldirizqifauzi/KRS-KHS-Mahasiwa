@@ -34,8 +34,9 @@
                                                         <tr>
                                                             <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7" width="1%">No</th>
                                                             <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-3">Nama Matakuliah</th>
-                                                            <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-3" width="4%">SKS Matakuliah</th>
-                                                            <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-3" width="4%">Bobot Matakuliah</th>
+                                                            <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-3" width="4%">Semester </th>
+                                                            <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-3" width="4%">SKS </th>
+                                                            <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-3" width="4%">Bobot </th>
                                                             <th class="text-uppercase text-secondary text-xs text-center font-weight-bolder opacity-7 ps-3">Aksi</th>
                                                         </tr>
                                                     </thead>
@@ -52,6 +53,11 @@
                                                                     <td>
                                                                         <div class="my-auto">
                                                                             <h6 class="mb-0 text-xl ps-3">{{ $item->nama }}</h6>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div class="my-auto">
+                                                                            <h6 class="mb-0 text-xl ps-3">{{ $item->semester }}</h6>
                                                                         </div>
                                                                     </td>
                                                                     <td>
@@ -137,7 +143,7 @@
                                                 <span class="text-danger">{{ $errors->first('nama') }}</span>
                                         </div>
                                         @endif
-                                        <div class="col-lg-4">
+                                        <div class="col-lg-3">
                                             {{-- Nama Prodi --}}
                                             <div class="form-group">
                                                 @if(request()->filled('prodi_id') != null)
@@ -147,7 +153,17 @@
                                                 @endif
                                             </div>
                                         </div>
-                                        <div class="col-lg-4">
+                                        <div class="col-lg-3">
+                                            {{-- Semester Prodi --}}
+                                            <div class="form-group">
+                                                @if(request()->filled('prodi_id') != null)
+                                                    <label for="semester">Semester  </label>
+                                                    {!! Form::text('semester', null , ['class' => 'form-control']) !!}
+                                                    <span class="text-danger">{{ $errors->first('semester') }}</span>
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3">
                                             {{-- Sks Matakuliah --}}
                                             <div class="form-group">
                                                 @if(request()->filled('prodi_id') != null)
@@ -157,7 +173,7 @@
                                                 @endif
                                             </div>
                                         </div>
-                                        <div class="col-lg-4">
+                                        <div class="col-lg-3">
                                             {{-- Bobot Matakuliah --}}
                                             <div class="form-group">
                                                 @if(request()->filled('prodi_id') != null)

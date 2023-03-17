@@ -24,10 +24,17 @@ class MahasiswaMasterDataKRSController extends Controller
      */
     public function index(Request $request)
     {
+        if (auth()->user()->mahasiswa->first()->prodi_id == null) {
+            // jika status matakuliah tidak dipilih, tampilkan pesan error
+            flash()->addError('Akses dibatasi!', 'Maaf ' .  auth()->user()->mahasiswa->first()->nama);
+            return redirect()->back();
+       }
+
         $model = AdminMasterDataKRS::get();
+
         if ($model->count() <= 0) {
-            flash()->addError('KRS Belum Ada! ','Data Kartu Rencana Studi');
-            return redirect()->route('mahasiswamahasiswa.beranda');
+            flash()->addError('Maaf '. auth()->user()->mahasiswa->first()->nama .' Matakuliah untuk sementara belum ada!, dikarenakan KRS belum diupdate','Kartu Rencana Studi');
+            return redirect()-> route('mahasiswamahasiswa.beranda');
         }else {
             return view('mahasiswa.' . $this->viewIndex, [
                 'models' => AdminMasterDataKRS::where('prodi_id', auth()->user()->mahasiswa->first()->prodi_id)->get(),
@@ -55,6 +62,13 @@ class MahasiswaMasterDataKRSController extends Controller
     {
         $userId = auth()->user()->id;
         $nama = $request->input('nama');
+        $matakuliah_status = $request->input('matakuliah_status');
+
+        if ($matakuliah_status == null) {
+            // jika status matakuliah tidak dipilih, tampilkan pesan error
+            flash()->addError('Sebelum ambil matakuliah harap pilih status matakuliah terlebih dahulu!', 'Maaf ' .  auth()->user()->mahasiswa->first()->nama);
+            return redirect()->back()->withInput();
+        }
 
         $result = DB::table('mahasiswa_master_data_k_r_s')
                     ->where('user_id', $userId)
@@ -72,6 +86,7 @@ class MahasiswaMasterDataKRSController extends Controller
             'nama' => $request->input('nama'),
             'sks' => $request->input('sks'),
             'semester' => $request->input('semester'),
+            'matakuliah_status' => $request->input('matakuliah_status')
         ]);
         flash()->addSuccess('Data Krs Berhasil diambil');
         return redirect()->route($this->routePrefix . '.show', auth()->user()->mahasiswa->first()->prodi->id);
@@ -82,6 +97,11 @@ class MahasiswaMasterDataKRSController extends Controller
      */
     public function show($id)
     {
+        if (auth()->user()->mahasiswa->first()->prodi_id == null) {
+             // jika status matakuliah tidak dipilih, tampilkan pesan error
+             flash()->addError('Akses dibatasi!', 'Maaf ' .  auth()->user()->mahasiswa->first()->nama);
+             return redirect()->back();
+        }
         return view('mahasiswa.' . $this->viewShow,[
             'model' => MahasiswaMasterDataKRS::where('user_id', auth()->user()->mahasiswa->first()->mahasiswa_id)->paginate(5),
             'dataSemester' => MahasiswaMasterDataKRS::sum('sks'),

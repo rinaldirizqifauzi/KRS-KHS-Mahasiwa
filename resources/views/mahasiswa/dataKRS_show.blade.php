@@ -17,7 +17,7 @@
             <div class="row">
                 <div class="col-lg-12 col-md-7 col-sm-12">
                     <div class="d-flex flex-column h-100">
-                        <h5 class="font-weight-bolder">{{ $title }}   {{ auth()->user()->mahasiswa->first() ->nama }}</h5>
+                        <h5 class="font-weight-bolder">{{ $title }}   {{ auth()->user()->mahasiswa->first()->nama }}</h5>
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="input-group">
@@ -26,9 +26,11 @@
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-12">
-                                <div class="float-end">
-                                    <a href="{{ route($routePrefix . ('.index')) }}" class="btn btn-primary btn-md btn-round">Ambil Matakuliah</a>
-                                </div>
+                                @if(auth()->user()->mahasiswa->first()->prodi->id != null)
+                                    <div class="float-end">
+                                        <a href="{{ route($routePrefix . ('.index')) }}" class="btn btn-primary btn-md btn-round">Ambil Matakuliah</a>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                         <div class="container my-3">
@@ -40,6 +42,7 @@
                                             <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Nama Matakuliah</th>
                                             <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7" width="3%">Semester</th>
                                             <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7" width="3%">SKS</th>
+                                            <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7" width="7%">Status Matakuliah</th>
                                             <th class="text-uppercase text-secondary text-xs text-center font-weight-bolder opacity-7 ps-3" width="10%">Aksi</th>
                                         </tr>
                                     </thead>
@@ -69,6 +72,13 @@
                                                 </td>
                                                 <td>
                                                     <center>
+                                                        <div class="my-auto">
+                                                            <button class="btn btn-sm btn-round my-1 {{ $item->matakuliah_status == 'baru' ? 'btn-success' : 'btn-warning' }}">{{ ucwords($item->matakuliah_status) }}</button>
+                                                        </div>
+                                                    </center>
+                                                </td>
+                                                <td>
+                                                    <center>
                                                         {!! Form::open([
                                                             'route' => [$routePrefix . '.destroy', $item->id],
                                                             'method' => 'DELETE',
@@ -93,6 +103,9 @@
                                                 <div class="my-auto">
                                                     <h6 class="mb-0 text-xl text-center"><i>{{ $dataSemester }} SKS</i></h6>
                                                 </div>
+                                            </td>
+                                            <td>
+
                                             </td>
                                             <td>
 

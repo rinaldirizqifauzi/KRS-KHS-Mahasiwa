@@ -131,8 +131,8 @@ class AdminMasterDataMahasiswaController extends Controller
             'prodi_id' => 'nullable',
         ]);
 
-        $prodi = AdminMasterDataProdi::find($request->prodi_id);
-        $requestData['prodi_id'] = $prodi->id;
+        $prodi = AdminMasterDataProdi::find($request?->prodi_id);
+        $requestData['prodi_id'] = $prodi?->id;
 
         $model = Model::findOrFail($id);
         $model->fill($requestData);

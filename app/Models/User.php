@@ -5,13 +5,16 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Spatie\ModelStatus\HasStatuses;
 
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
+    use HasStatuses;    
 
     /**
      * The attributes that are mass assignable.
@@ -55,5 +58,13 @@ class User extends Authenticatable
     public function mahasiswa(): HasMany
     {
         return $this->hasMany(AdminMasterDataMahasiswa::class, 'mahasiswa_id', 'id');
+    }
+
+    protected static function booted()
+    {
+        // sesudah data dibuat
+        Static::created(function($user){
+            $user->setStatus('aktif');
+        });
     }
 }

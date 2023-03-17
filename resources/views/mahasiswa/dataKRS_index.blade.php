@@ -41,6 +41,7 @@
                                             <th class="text-uppercase text-secondary text-xs text-center font-weight-bolder opacity-7" width="3%">Semester</th>
                                             <th class="text-uppercase text-secondary text-xs text-center font-weight-bolder opacity-7" width="3%">SKS</th>
                                             <th class="text-uppercase text-secondary text-xs text-center font-weight-bolder opacity-7" width="3%">Bobot</th>
+                                            <th class="text-uppercase text-secondary text-xs text-center font-weight-bolder opacity-7" width="7%">Status Matakuliah</th>
                                             <th class="text-uppercase text-secondary text-xs text-center font-weight-bolder opacity-7" width="10%">Aksi</th>
                                         </tr>
                                     </thead>
@@ -73,19 +74,22 @@
                                                         <h6 class="mb-0 text-xl text-center ps-3">{{ $item->bobot }}</h6>
                                                     </div>
                                                 </td>
+                                                {!! Form::model($models ,['route' => 'mahasiswakrs.store', 'method' => 'POST']) !!}
+                                                @csrf
+                                                <td>
+                                                    {!! Form::select('matakuliah_status',['baru' => 'Baru', 'mengulang' => 'Ulang' ] , null, ['class' => 'form-control','placeholder' => 'Pilih Status']) !!}
+                                                </td>
                                                 <td>
                                                    <center>
-                                                    {!! Form::model($models ,['route' => 'mahasiswakrs.store', 'method' => 'POST']) !!}
-                                                        @csrf
                                                         <input type="hidden" name="nama" value="{{ $item->nama }}">
                                                         <input type="hidden" name="sks" value="{{ $item->semester }}">
                                                         <input type="hidden" name="semester" value="{{ $item->sks }}">
                                                         <div class="my-auto">
                                                             {!! Form::submit('Ambil', ['class' => 'btn btn-sm ml-3 my-1 btn-primary btn-round float-end']) !!}
                                                         </div>
-                                                    {!! Form::close() !!}
-                                                   </center>
+                                                    </center>
                                                 </td>
+                                                {!! Form::close() !!}
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -98,9 +102,5 @@
         </div>
     </div>
 </div>
-@endsection
-
-@section('js')
-
 @endsection
 

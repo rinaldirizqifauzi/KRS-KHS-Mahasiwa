@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User as Model;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -47,7 +48,7 @@ class MahasiswaController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, User $user)
     {
         $requestData = $request->validate([
             'name' => 'required',

@@ -65,5 +65,6 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'auth.admin' => \App\Http\Middleware\Admin::class,
         'auth.mahasiswa' => \App\Http\Middleware\Mahasiswa::class,
+        'auth.mahasiswa.delete' => \App\Http\Middleware\RedirectIfDeleted::class,
     ];
 }

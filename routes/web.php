@@ -13,6 +13,8 @@ use App\Http\Controllers\AdminMasterDataProdiController;
 use App\Http\Controllers\MahasiswaMasterDataKRSController;
 use App\Http\Controllers\AdminMasterDataMahasiswaController;
 use App\Http\Controllers\MahasiswaMasterDataMahasiswaController;
+use App\Http\Controllers\StatusController;
+use App\Http\Controllers\StatusMahasiswaController;
 use App\Models\MahasiswaMasterDataKRS;
 
 /*
@@ -47,9 +49,10 @@ Route::prefix('admin')->middleware(['auth', 'auth.admin'])->name('admin')->group
     Route::get('edit-matakuliah/{id}', [AdminMasterDataProdiController::class, 'editMatakuliah'])->name('edit.matakuliah');
     Route::put('update-matakuliah/{id}', [AdminMasterDataProdiController::class, 'updateMatakuliah'])->name('update.matakuliah');
     Route::get('delete-matakuliah/{id}', [AdminMasterDataProdiController::class, 'deleteMatakuliah'])->name('delete.matakuliah');
+    Route::get('/users/update-status', [StatusController::class, 'updateStatus'])->name('users.update-status');
 });
 
-Route::prefix('mahasiswa')->middleware(['auth', 'auth.mahasiswa'])->name('mahasiswa')->group(function() {
+Route::prefix('mahasiswa')->middleware(['auth', 'auth.mahasiswa','auth.mahasiswa.delete'])->name('mahasiswa')->group(function() {
     Route::get('beranda', [BerandaMahasiswaController::class, 'beranda'])->name('mahasiswa.beranda');
     Route::resource('data-mahasiswa', MahasiswaMasterDataMahasiswaController::class);
     Route::resource('krs', MahasiswaMasterDataKRSController::class);

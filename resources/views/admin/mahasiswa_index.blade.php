@@ -40,6 +40,7 @@
                                             <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-3">NPM</th>
                                             <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-3">No.HP</th>
                                             <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-3">Akses</th>
+                                            <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-3">Status</th>
                                             <th class="text-uppercase text-secondary text-xs text-center font-weight-bolder opacity-7 ps-3">Aksi</th>
                                         </tr>
                                     </thead>
@@ -65,6 +66,17 @@
                                             </td>
                                             <td>
                                                 <span class="text-xl font-weight-bold ps-2">{{ $item->akses }}</span>
+                                            </td>
+                                            <td>
+                                                <span class="text-xl font-weight-bold ps-2">
+                                                    <a href="{{ route('adminusers.update-status', [
+                                                            'model' => 'user',
+                                                            'id' => $item->id,
+                                                            'status' => $item->status == 'aktif' ? 'non-aktif' : 'aktif',
+                                                        ]) }}" class="btn btn-sm my-2 {{ $item->status == 'aktif' ? 'btn-danger' : 'btn-primary' }}" onclick="return confirm('Anda Yakin?')">
+                                                            {{ $item->status == 'aktif' ? 'Non-Aktifkan Siswa Ini' : 'Aktifkan Siswa Ini' }}
+                                                    </a>
+                                                </span>
                                             </td>
                                             <td>
                                               <center>

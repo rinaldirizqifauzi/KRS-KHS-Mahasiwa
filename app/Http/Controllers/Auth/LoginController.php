@@ -43,14 +43,27 @@ class LoginController extends Controller
 
     public function authenticated(Request $request, $user)
     {
-        if($user->akses == 'admin' || $user->akses == 'admin'){
-            return redirect()->route('adminadmin.beranda');
-        }elseif($user->akses == 'mahasiswa'){
-            return redirect()->route('mahasiswamahasiswa.beranda');
-        }else{
+        if ($user->status == 'aktif') {
+            if($user->akses == 'admin' || $user->akses == 'admin'){
+                return redirect()->route('adminadmin.beranda');
+            }elseif($user->akses == 'mahasiswa'){
+                return redirect()->route('mahasiswamahasiswa.beranda');
+            }
+        } else {
             Auth::logout();
-            flash()->addSuccess('Anda tidak memiliki hak akses');
+            flash()->addError('Akun Anda tidak aktif. Silahkan hubungi admin', 'Maaf');
             return redirect()->route('login');
         }
+
+        // if($user->akses == 'admin' || $user->akses == 'admin'){
+        //     return redirect()->route('adminadmin.beranda');
+        // }elseif($user->akses == 'mahasiswa'){
+        //     return redirect()->route('mahasiswamahasiswa.beranda');
+        // }else{
+        //     Auth::logout();
+        //     flash()->addSuccess('Anda tidak memiliki hak akses');
+        //     return redirect()->route('login');
+        // }
     }
+
 }

@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('mahasiswa_master_data_k_r_s', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
+            $table->string('matakuliah_status');
             $table->string('nama')->nullable();
             $table->string('sks')->nullable();
             $table->string('semester')->nullable();
