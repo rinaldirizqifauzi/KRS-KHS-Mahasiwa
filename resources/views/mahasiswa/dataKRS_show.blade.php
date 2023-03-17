@@ -17,7 +17,7 @@
             <div class="row">
                 <div class="col-lg-12 col-md-7 col-sm-12">
                     <div class="d-flex flex-column h-100">
-                        <h5 class="font-weight-bolder">{{ $title }}   {{ auth()->user()->mahasiswa->first()->prodi->nama }}</h5>
+                        <h5 class="font-weight-bolder">{{ $title }}   {{ auth()->user()->mahasiswa->first() ->nama }}</h5>
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="input-group">
@@ -27,7 +27,7 @@
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="float-end">
-                                    <a href="{{ route('mahasiswakrs.show', auth()->user()->mahasiswa->first()->prodi->id) }}" class="btn btn-md btn-round btn-primary">Lihat Matakuliah Yang Diambil</a>
+                                    <a href="{{ route($routePrefix . ('.index')) }}" class="btn btn-primary btn-md btn-round">Ambil Matakuliah</a>
                                 </div>
                             </div>
                         </div>
@@ -38,15 +38,14 @@
                                         <tr>
                                             <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7" width="1%">No</th>
                                             <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Nama Matakuliah</th>
-                                            <th class="text-uppercase text-secondary text-xs text-center font-weight-bolder opacity-7" width="3%">Semester</th>
-                                            <th class="text-uppercase text-secondary text-xs text-center font-weight-bolder opacity-7" width="3%">SKS</th>
-                                            <th class="text-uppercase text-secondary text-xs text-center font-weight-bolder opacity-7" width="3%">Bobot</th>
-                                            <th class="text-uppercase text-secondary text-xs text-center font-weight-bolder opacity-7" width="10%">Aksi</th>
+                                            <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7" width="3%">Semester</th>
+                                            <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7" width="3%">SKS</th>
+                                            <th class="text-uppercase text-secondary text-xs text-center font-weight-bolder opacity-7 ps-3" width="10%">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php $no=1 ?>
-                                        @foreach ($models->first()->prodi->childrenProdi as $item)
+                                        @foreach ($model as $item)
                                             <tr>
                                                 <td>
                                                     <div class="my-auto">
@@ -60,36 +59,50 @@
                                                 </td>
                                                 <td>
                                                     <div class="my-auto">
-                                                        <h6 class="mb-0 text-xl text-center ps-3">{{ $item->semester }}</h6>
+                                                        <h6 class="mb-0 text-xl text-center">{{ $item->semester }}</h6>
                                                     </div>
                                                 </td>
                                                 <td>
                                                     <div class="my-auto">
-                                                        <h6 class="mb-0 text-xl text-center ps-3">{{ $item->sks }}</h6>
+                                                        <h6 class="mb-0 text-xl text-center">{{ $item->sks }}</h6>
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <div class="my-auto">
-                                                        <h6 class="mb-0 text-xl text-center ps-3">{{ $item->bobot }}</h6>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                   <center>
-                                                    {!! Form::model($models ,['route' => 'mahasiswakrs.store', 'method' => 'POST']) !!}
-                                                        @csrf
-                                                        <input type="hidden" name="nama" value="{{ $item->nama }}">
-                                                        <input type="hidden" name="sks" value="{{ $item->semester }}">
-                                                        <input type="hidden" name="semester" value="{{ $item->sks }}">
-                                                        <div class="my-auto">
-                                                            {!! Form::submit('Ambil', ['class' => 'btn btn-sm ml-3 my-1 btn-primary btn-round float-end']) !!}
-                                                        </div>
-                                                    {!! Form::close() !!}
-                                                   </center>
+                                                    <center>
+                                                        {!! Form::open([
+                                                            'route' => [$routePrefix . '.destroy', $item->id],
+                                                            'method' => 'DELETE',
+                                                            'onsubmit' => 'return confirm ("Yakin menghapus data ini?")'
+                                                        ]) !!}
+
+                                                        <button type="submit" class="btn btn-danger btn-md btn-round my-1 mx-2"><i class="fa-solid fa-trash-can"></i></button>
+                                                        {!! Form::close() !!}
+                                                    </center>
                                                 </td>
                                             </tr>
                                         @endforeach
+                                        <tr colspan="3">
+                                            <td></td>
+                                            <td>
+                                                <div class="my-auto">
+                                                    <h6 class="mb-0 text-xl ps-3"><i>Total SKS</i></h6>
+                                                </div>
+                                            </td>
+                                            <td></td>
+                                            <td>
+                                                <div class="my-auto">
+                                                    <h6 class="mb-0 text-xl text-center"><i>{{ $dataSemester }} SKS</i></h6>
+                                                </div>
+                                            </td>
+                                            <td>
+
+                                            </td>
+                                        </tr>
                                     </tbody>
                                 </table>
+                            </div>
+                            <div class="float-end my-2">
+                                {{ $model->links() }}
                             </div>
                         </div>
                     </div>

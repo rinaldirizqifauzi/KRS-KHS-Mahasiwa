@@ -18,6 +18,7 @@ class MahasiswaMasterDataKRSController extends Controller
     private $viewIndex = 'dataKrs_index';
     private $viewCreate  = 'dataKrs_form';
     private $viewEdit  = 'dataKrs_form';
+    private $viewShow  = 'dataKrs_show';
     /**
      * Display a listing of the resource.
      */
@@ -29,8 +30,8 @@ class MahasiswaMasterDataKRSController extends Controller
             return redirect()->route('mahasiswamahasiswa.beranda');
         }else {
             return view('mahasiswa.' . $this->viewIndex, [
-                'models' => AdminMasterDataKRS::where('prodi_id', auth()->user()->mahasiswa->first()->prodi_id)
-                                                ->paginate(10),
+                'models' => AdminMasterDataKRS::where('prodi_id', auth()->user()->mahasiswa->first()->prodi_id)->get(),
+                'ambilMatakuliah' => MahasiswaMasterDataKRS::paginate(1),
                 'bread_title1' => 'Kartu Rencana Studi',
                 'bread_title2' => 'Data Kartu Rencana Studi',
                 'title' => 'Data Kartu Rencana Studi',
@@ -65,6 +66,7 @@ class MahasiswaMasterDataKRSController extends Controller
             flash()->addError('Matakuliah sudah diambil sebelumnya!', 'Maaf ' .  auth()->user()->mahasiswa->first()->nama);
             return redirect()->back()->withInput();
         }
+
         MahasiswaMasterDataKRS::create([
             'user_id' => auth()->user()->id,
             'nama' => $request->input('nama'),
@@ -72,15 +74,22 @@ class MahasiswaMasterDataKRSController extends Controller
             'semester' => $request->input('semester'),
         ]);
         flash()->addSuccess('Data Krs Berhasil diambil');
-        return back();
+        return redirect()->route($this->routePrefix . '.show', auth()->user()->mahasiswa->first()->prodi->id);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show( $mahasiswaMasterDataKRS)
+    public function show($id)
     {
-        //
+        return view('mahasiswa.' . $this->viewShow,[
+            'model' => MahasiswaMasterDataKRS::where('user_id', auth()->user()->mahasiswa->first()->mahasiswa_id)->paginate(5),
+            'dataSemester' => MahasiswaMasterDataKRS::sum('sks'),
+            'bread_title1' => 'Kartu Rencana Studi',
+            'bread_title2' => 'Data Kartu Rencana Studi',
+            'title' => 'Data Kartu Rencana Studi',
+            'routePrefix' => $this->routePrefix
+        ]);
     }
 
     /**
@@ -102,8 +111,12 @@ class MahasiswaMasterDataKRSController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy( $mahasiswaMasterDataKRS)
+    public function destroy($id)
     {
-        //
+        $model = MahasiswaMasterDataKRS::findOrfail($id);
+        $model->delete();
+
+        flash()->addSuccess('Data krs berhasil dihapus');
+        return redirect()->back();
     }
 }
