@@ -52,11 +52,17 @@
                                                 <p class="text-xl font-weight-bold mb-0 ps-2">{{ $item->nama }}</p>
                                             </td>
                                             <td>
-                                                <center>
-                                                    <a href="{{ route($routePrefix . '.show', $item->id) }}" class="btn btn-warning btn-md btn-round my-1">
-                                                        Lihat Mahasiswa
-                                                    </a>
-                                                </center>
+                                               @if ($item->count > 0)
+                                                    <center>
+                                                        <a href="{{ route($routePrefix . '.show', $item->id) }}" class="btn btn-warning btn-md btn-round my-1">
+                                                            Lihat Mahasiswa
+                                                        </a>
+                                                    </center>
+                                                @else
+                                                    <center>
+                                                        Belum Ada Mahasiswa
+                                                    </center>
+                                                @endif
                                             </td>
                                             <td>
                                               <center>

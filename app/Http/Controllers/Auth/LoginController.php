@@ -48,6 +48,8 @@ class LoginController extends Controller
                 return redirect()->route('adminadmin.beranda');
             }elseif($user->akses == 'mahasiswa'){
                 return redirect()->route('mahasiswamahasiswa.beranda');
+            }elseif ($user->akses == 'dosen') {
+                return redirect()->route('dosen.beranda');
             }
         } else {
             Auth::logout();

@@ -18,6 +18,7 @@ class AdminMasterDataProdiController extends Controller
      */
     public function index()
     {
+        
         return view('admin.' . $this->viewIndex, [
             'models' => Model::whereNull('prodi_id')->get(),
             'bread_title1' => 'Prodi',
@@ -80,6 +81,12 @@ class AdminMasterDataProdiController extends Controller
      */
     public function show($id)
     {
+        $model = Model::findOrFail($id);
+        if ($model->prodi_id == null) {
+            flash()->addError('Maaf Mahasiswa untuk matakuliah' .  $model->nama . 'sementara belum ada!','Lihat Mahasiswa');
+            return back();
+        }
+
         return view('admin.' . $this->viewShow, [
             'model' => Model::with('childrenProdi')->findOrFail($id),
             'bread_title1' => 'Mahasiswa',

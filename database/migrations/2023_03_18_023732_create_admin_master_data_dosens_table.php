@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('admin_master_data_mahasiswas', function (Blueprint $table) {
+        Schema::create('admin_master_data_dosens', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('dosen_id')->nullable();
             $table->foreignId('mahasiswa_id')->nullable();
             $table->foreignId('prodi_id')->nullable();
             $table->string('nama');
-            $table->string('npm');
-            $table->enum('kelas', ['siang', 'malam', 'ekstensi']);
+            $table->string('nip');
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('admin_master_data_mahasiswas');
+        Schema::dropIfExists('admin_master_data_dosens');
     }
 };

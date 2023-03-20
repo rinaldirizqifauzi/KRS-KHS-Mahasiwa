@@ -36,10 +36,8 @@
                                         <tr>
                                             <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7" width="1%">No</th>
                                             <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-3">Nama</th>
-                                            <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-3">Email</th>
-                                            <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-3">Akses</th>
-                                            <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-3">No.HP</th>
-                                            <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-3">Status</th>
+                                            <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-3">NIP</th>
+                                            <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-3">Matakuliah</th>
                                             <th class="text-uppercase text-secondary text-xs text-center font-weight-bolder opacity-7 ps-3">Aksi</th>
                                         </tr>
                                     </thead>
@@ -52,45 +50,33 @@
                                                 </div>
                                             </td>
                                             <td>
-                                                <p class="text-xl font-weight-bold mb-0 ps-2">{{ $item->name }}</p>
+                                                <p class="text-xl font-weight-bold mb-0 ps-2">{{ $item->nama }}</p>
                                             </td>
                                             <td>
-                                                <span class="text-xl font-weight-bold ps-2">{{ $item->email }}</span>
+                                                <span class="text-xl font-weight-bold ps-2">{{ $item->nip }}</span>
                                             </td>
                                             <td>
-                                                <span class="text-xl font-weight-bold ps-2">{{ $item->nohp }}</span>
+                                                @if ($item->dosen_id != null)
+                                                    <center>
+                                                        <a href="{{ route('adminindex.matakuliah', $item->dosen_id) }}" class="btn btn-primary btn-sm btn-round my-1">Lihat</a>
+                                                    </center>
+                                                @else
+                                                    Tidak Ada Data Matakuliah
+                                                @endif
                                             </td>
                                             <td>
-                                                <span class="text-xl font-weight-bold ps-2">{{ $item->akses }}</span>
-                                            </td>
-                                            <td>
-                                                <span class="text-xl font-weight-bold ps-2">
-                                                    <a href="{{ route('adminusers.update-status', [
-                                                            'model' => 'user',
-                                                            'id' => $item->id,
-                                                            'status' => $item->status == 'aktif' ? 'non-aktif' : 'aktif',
-                                                        ]) }}" class="btn btn-sm my-2 {{ $item->status == 'aktif' ? 'btn-danger' : 'btn-primary' }}" onclick="return confirm('Anda Yakin?')">
-                                                            {{ $item->status == 'aktif' ? 'Non-Aktifkan Siswa Ini' : 'Aktifkan Siswa Ini' }}
-                                                    </a>
-                                                </span>
-                                            </td>
-                                            <td>
-                                              <center>
-                                                 <div class="d-flex">
-                                                    <a href="{{ route($routePrefix . '.edit', $item->id) }}" class="btn btn-warning btn-md btn-round my-1">
-                                                        <i class="fa-solid fa-pen-to-square fa-lg"></i>
-                                                    </a>
-
+                                                <div class="d-flex">
                                                     {!! Form::open([
                                                         'route' => [$routePrefix . '.destroy', $item->id],
                                                         'method' => 'DELETE',
                                                         'onsubmit' => 'return confirm ("Yakin menghapus data ini?")'
                                                     ]) !!}
-
-                                                    <button type="submit" class="btn btn-danger btn-md btn-round my-1 mx-2"><i class="fa-solid fa-trash-can"></i></button>
+                                                        <a href="{{ route($routePrefix . '.edit', $item->id) }}" class="btn btn-warning btn-md btn-round my-1">
+                                                            <i class="fa-solid fa-pen-to-square fa-lg"></i>
+                                                        </a>
+                                                        <button type="submit" class="btn btn-danger btn-md btn-round my-1 mx-2"><i class="fa-solid fa-trash-can"></i></button>
                                                     {!! Form::close() !!}
-                                                 </div>
-                                              </center>
+                                                </div>
                                             </td>
                                         </tr>
                                         @endforeach
@@ -105,4 +91,3 @@
     </div>
 </div>
 @endsection
-

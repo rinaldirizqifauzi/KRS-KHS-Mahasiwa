@@ -37,8 +37,9 @@
                                             <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7" width="1%">No</th>
                                             <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-3">Nama</th>
                                             <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-3">Email</th>
-                                            <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-3">Akses</th>
+                                            <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-3">NIP</th>
                                             <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-3">No.HP</th>
+                                            <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-3">Akses</th>
                                             <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-3">Status</th>
                                             <th class="text-uppercase text-secondary text-xs text-center font-weight-bolder opacity-7 ps-3">Aksi</th>
                                         </tr>
@@ -56,6 +57,9 @@
                                             </td>
                                             <td>
                                                 <span class="text-xl font-weight-bold ps-2">{{ $item->email }}</span>
+                                            </td>
+                                            <td>
+                                                <span class="text-xl font-weight-bold ps-2">{{ $item->mahasiswa->first()?->npm ?? 'Data Dosen Tidak Ada'}}</span>
                                             </td>
                                             <td>
                                                 <span class="text-xl font-weight-bold ps-2">{{ $item->nohp }}</span>

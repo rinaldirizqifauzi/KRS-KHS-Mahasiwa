@@ -14,7 +14,7 @@ use Spatie\ModelStatus\HasStatuses;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
-    use HasStatuses;    
+    use HasStatuses;
 
     /**
      * The attributes that are mass assignable.
@@ -58,6 +58,16 @@ class User extends Authenticatable
     public function mahasiswa(): HasMany
     {
         return $this->hasMany(AdminMasterDataMahasiswa::class, 'mahasiswa_id', 'id');
+    }
+
+    /**
+     * Get all of the dosen for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function dosen(): HasMany
+    {
+        return $this->hasMany(AdminMasterDataDosen::class, 'dosen_id', 'id');
     }
 
     protected static function booted()
