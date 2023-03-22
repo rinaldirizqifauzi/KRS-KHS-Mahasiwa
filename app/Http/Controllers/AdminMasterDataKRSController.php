@@ -13,9 +13,8 @@ class AdminMasterDataKRSController extends Controller
 {
 
     private $routePrefix = 'adminkrs';
-    private $viewIndex = 'dataKrs_index';
     private $viewCreate  = 'dataKrs_form';
-    private $viewEdit  = 'dataKrs_form';
+
     /**
      * Display a listing of the resource.
      */
@@ -74,37 +73,5 @@ class AdminMasterDataKRSController extends Controller
         DB::commit();
         flash()->addSuccess('Data KRS Berhasil Disimpan');
         return redirect()->route($this->routePrefix . '.index');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(AdminMasterDataKRS $adminMasterDataKRS)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(AdminMasterDataKRS $adminMasterDataKRS)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, AdminMasterDataKRS $adminMasterDataKRS)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(AdminMasterDataKRS $adminMasterDataKRS)
-    {
-        //
     }
 }

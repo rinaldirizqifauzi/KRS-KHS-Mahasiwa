@@ -32,4 +32,5 @@ class AdminMasterDataDosen extends Model
     {
         return $this->belongsTo(User::class, 'dosen_id', 'id');
     }
+
 }

@@ -49,6 +49,7 @@ Route::prefix('admin')->middleware(['auth', 'auth.admin'])->name('admin')->group
     Route::resource('dosen-prodi', DosenProdiController::class);
 
     Route::get('index-matakuliah/{dosen_id}', [AdminMasterDataDosenController::class, 'indexMatakuliah'])->name('index.matakuliah');
+    Route::post('index-matakuliah/', [AdminMasterDataDosenController::class, 'storeMatakuliah'])->name('store.matakuliah');
     Route::delete('delete-dosen-matakuliah/{dosen_id}', [AdminMasterDataDosenController::class, 'deleteMatakuliah'])->name('delete.dosen.matakuliah');
 
 

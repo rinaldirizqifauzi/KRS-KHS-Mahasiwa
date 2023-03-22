@@ -163,6 +163,10 @@
                                     <div class="form-group">
                                         {!! Form::hidden('dosen_id', $modelDosen->first()->dosen_id, []) !!}
                                     </div>
+                                    {{-- Nama Dosen --}}
+                                    <div class="form-group">
+                                        {!! Form::hidden('nama_dosen', $modelDosen->first()->nama , []) !!}
+                                    </div>
                                     {!! Form::submit($button, ['class' => 'btn btn-sm ml-3 my-1 btn-primary btn-round float-end']) !!}
                                     <a href="{{ route('admindata-dosen.index') }}" class="btn btn-sm mx-3 my-1 bg-gradient-secondary  btn-round float-end">Kembali</a>
                                 {!! Form::close() !!}

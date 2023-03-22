@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use App\Models\AdminMasterDataProdi;
 use App\Models\AdminMasterDataMahasiswa;
 use App\Models\AdminMasterDataMahasiswa as Model;

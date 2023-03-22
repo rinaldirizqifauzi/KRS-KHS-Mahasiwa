@@ -8,6 +8,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\ModelStatus\HasStatuses;
 
@@ -69,6 +70,7 @@ class User extends Authenticatable
     {
         return $this->hasMany(AdminMasterDataDosen::class, 'dosen_id', 'id');
     }
+
 
     protected static function booted()
     {

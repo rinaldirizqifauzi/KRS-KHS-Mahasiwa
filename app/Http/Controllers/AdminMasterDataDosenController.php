@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\DosenProdi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Models\AdminMasterDataDosen;
 use App\Models\AdminMasterDataProdi;
 use App\Models\AdminMasterDataMahasiswa;
 use App\Models\AdminMasterDataDosen as Model;
-use App\Models\DosenProdi;
-use App\Models\ProdiDosen;
 
 class AdminMasterDataDosenController extends Controller
 {
@@ -39,7 +39,6 @@ class AdminMasterDataDosenController extends Controller
     {
         return view('admin.' . $this->viewCreate, [
             'listAkun' => User::where('akses', 'dosen')->pluck('name', 'id'),
-            // 'listProdi' => AdminMasterDataProdi::where('prodi_id',null)->pluck('nama','id'),
             'listProdi' => AdminMasterDataProdi::where('prodi_id', '<>',null)->pluck('nama','id'),
             'listMahasiswa' =>  AdminMasterDataMahasiswa::where('prodi_id' , '<>', null)->pluck('nama', 'id'),
             'bread_title1' => 'Dosen',
@@ -68,14 +67,6 @@ class AdminMasterDataDosenController extends Controller
 
         flash()->addSuccess('Data Berhasil Disimpan');
         return redirect()->route($this->routePrefix . '.index');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show($id)
-    {
-
     }
 
     /**
@@ -145,10 +136,40 @@ class AdminMasterDataDosenController extends Controller
             'bread_title2' => 'Data Matakuliah Dosen',
             'title' => 'Data Matakuliah Dosen',
             'models' => new DosenProdi(),
-            'route' => 'admindosen-prodi.store',
+            'route' => 'adminstore.matakuliah',
             'method' => 'POST',
             'button' => 'Simpan',
         ]);
+    }
+
+
+    public function storeMatakuliah(Request $request)
+    {
+        $prodiId = $request->prodi_id;
+
+        $result = DB::table('dosen_prodis')
+                    ->where('prodi_id', $prodiId)
+                    ->exists();
+
+        foreach ($request->prodi_id as $item) {
+            if ($result == true) {
+                // jika data sudah ada di database, tampilkan pesan error
+                flash()->addError('Matakuliah ini sudah diambil sebelumnya!', 'Maaf ');
+                return redirect()->back()->withInput();
+            }
+            $dataProdiDosen = [
+                'dosen_id' => $request->dosen_id,
+                'prodi_id' => $item,
+                'nama_dosen' => $request->nama_dosen,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ];
+            DosenProdi::create($dataProdiDosen);
+        };
+
+        flash()->addSuccess('Data Berhasil Disimpan');
+        return back();
+
     }
 
     public function deleteMatakuliah($id)
@@ -159,5 +180,4 @@ class AdminMasterDataDosenController extends Controller
         flash()->addSuccess('Data Berhasil Hapus');
         return back();
     }
-
 }

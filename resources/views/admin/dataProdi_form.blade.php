@@ -34,9 +34,10 @@
                                                         <tr>
                                                             <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7" width="1%">No</th>
                                                             <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-3">Nama Matakuliah</th>
-                                                            <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-3" width="4%">Semester </th>
+                                                            <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-3" width="3%">Semester </th>
                                                             <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-3" width="4%">SKS </th>
                                                             <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-3" width="4%">Bobot </th>
+                                                            <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-3">Dosen </th>
                                                             <th class="text-uppercase text-secondary text-xs text-center font-weight-bolder opacity-7 ps-3">Aksi</th>
                                                         </tr>
                                                     </thead>
@@ -68,6 +69,11 @@
                                                                     <td>
                                                                         <div class="my-auto">
                                                                             <h6 class="mb-0 text-center text-xl ps-3">{{ $item->bobot }}</h6>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div class="my-auto">
+                                                                            <h6 class="mb-0 text-xl ps-3">{{ $item->dosenProdi->first()?->nama_dosen }}</h6>
                                                                         </div>
                                                                     </td>
                                                                     <td>

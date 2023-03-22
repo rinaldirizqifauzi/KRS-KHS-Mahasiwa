@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\AdminMasterDataProdi as Model;
-use App\Models\AdminMasterDataProdi ;
 use Illuminate\Http\Request;
+use App\Models\AdminMasterDataProdi as Model;
 
 class AdminMasterDataProdiController extends Controller
 {
     private $routePrefix = 'adminprodi';
-    private $routePrefixMTK = 'matakuliah';
     private $viewIndex  = 'dataProdi_index';
     private $viewCreate  = 'dataProdi_form';
     private $viewShow  = 'dataProdi_show';
@@ -18,7 +16,7 @@ class AdminMasterDataProdiController extends Controller
      */
     public function index()
     {
-        
+
         return view('admin.' . $this->viewIndex, [
             'models' => Model::whereNull('prodi_id')->get(),
             'bread_title1' => 'Prodi',
@@ -98,22 +96,6 @@ class AdminMasterDataProdiController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(AdminMasterDataProdi $adminMasterDataProdi)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, AdminMasterDataProdi $adminMasterDataProdi)
-    {
-        //
-    }
-
-    /**
      * Remove the specified resource from storage.
      */
     public function destroy($id)
@@ -151,8 +133,6 @@ class AdminMasterDataProdiController extends Controller
             'button' => 'Ubah',
 
         ]);
-        // flash()->addSuccess('Data berhasil dihapus');
-        // return redirect()->back();
     }
 
     public function updateMatakuliah(Request $request, $id)

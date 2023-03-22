@@ -4,21 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\AdminMasterDataKRS;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
-use App\Models\AdminMasterDataProdi;
 use App\Models\MahasiswaMasterDataKRS;
-use App\Models\AdminMasterDataMahasiswa;
-use Illuminate\Support\Facades\Validator;
 
 class MahasiswaMasterDataKRSController extends Controller
 {
 
     private $routePrefix = 'mahasiswakrs';
     private $viewIndex = 'dataKrs_index';
-    private $viewCreate  = 'dataKrs_form';
-    private $viewEdit  = 'dataKrs_form';
     private $viewShow  = 'dataKrs_show';
+    
     /**
      * Display a listing of the resource.
      */
@@ -45,14 +40,6 @@ class MahasiswaMasterDataKRSController extends Controller
                 'routePrefix' => $this->routePrefix
             ]);
         }
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -110,22 +97,6 @@ class MahasiswaMasterDataKRSController extends Controller
             'title' => 'Data Kartu Rencana Studi',
             'routePrefix' => $this->routePrefix
         ]);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit( $mahasiswaMasterDataKRS)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request,  $mahasiswaMasterDataKRS)
-    {
-        //
     }
 
     /**

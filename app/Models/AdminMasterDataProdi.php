@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class AdminMasterDataProdi extends Model
 {
@@ -41,5 +42,15 @@ class AdminMasterDataProdi extends Model
     public function krs(): HasMany
     {
         return $this->hasMany(AdminMasterDataKRS::class);
+    }
+
+    /**
+     * Get the dosenProdi that owns the AdminMasterDataProdi
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function dosenProdi(): HasMany
+    {
+        return $this->hasMany(DosenProdi::class, 'prodi_id', 'id');
     }
 }

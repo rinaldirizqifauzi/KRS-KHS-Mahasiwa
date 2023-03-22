@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('dosen_id');
             $table->foreignId('prodi_id');
+            $table->string('nama_dosen');
             $table->timestamps();
         });
     }
